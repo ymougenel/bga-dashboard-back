@@ -1,11 +1,11 @@
 package com.ymougenel.bgaranking.models;
 
 public enum Games {
-    DICE_FORGE(1127);
+    DICE_FORGE("1127");
 
-    private int id;
+    public String id;
 
-    private Games(int id) {
+    private Games(String id) {
         this.id = id;
     }
 }
