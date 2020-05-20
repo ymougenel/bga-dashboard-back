@@ -1,0 +1,13 @@
+version: '2.1'
+
+services: 
+
+  bga-ranking-database:
+    image: postgres:11.1
+    container_name: bga-ranking-database
+    environment:
+      - POSTGRES_PASSWORD=dbp4ss
+      - POSTGRES_DB=bga_ranking
+      - POSTGRES_USER=dbuser
+    ports:
+      - "5432:5432"
