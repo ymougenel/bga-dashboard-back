@@ -19,8 +19,8 @@ public class WebConnector {
     private static String GBA_URL = "https://boardgamearena.com/gamepanel/gamepanel/getRanking.html" + "?game=1127&start=0&mode=arena";
     private static DefaultHttpClient httpClient = new DefaultHttpClient();
 
-    public static String getRanks(Games games, long from) throws IOException, URISyntaxException {
-        String url = buildUrl(games.id, from);
+    public static String getRanks(String gameId, long from) throws IOException, URISyntaxException {
+        String url = buildUrl(gameId, from);
         HttpGet request = new HttpGet(url);
         HttpResponse response = httpClient.execute(request);
         HttpEntity httpEntity = response.getEntity();

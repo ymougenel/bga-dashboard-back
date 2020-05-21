@@ -16,16 +16,16 @@ import static org.junit.Assert.*;
 @SpringBootTest
 public class WebConnectorTest {
 
-
+    private RankingMapper rankingMapper = new RankingMapper();
     @Test
     public void testRankingsPage() throws IOException, URISyntaxException {
 
-        String jsonRanks = WebConnector.getRanks(Games.DICE_FORGE,0);
-        assertEquals(10, RankingMapper.INSTANCE.getRanks(jsonRanks).size());
+        String jsonRanks = WebConnector.getRanks(Games.DICE_FORGE.id,0);
+        assertEquals(10, rankingMapper.getRanks(jsonRanks).size());
 
-        jsonRanks = WebConnector.getRanks(Games.DICE_FORGE,50);
-        assertEquals(10, RankingMapper.INSTANCE.getRanks(jsonRanks).size());
-        assertEquals(51, RankingMapper.INSTANCE.getRanks(jsonRanks).get(0).getRank());
+        jsonRanks = WebConnector.getRanks(Games.DICE_FORGE.id,50);
+        assertEquals(10, rankingMapper.getRanks(jsonRanks).size());
+        assertEquals(51, rankingMapper.getRanks(jsonRanks).get(0).rank);
 
     }
 }
