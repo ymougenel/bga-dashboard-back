@@ -27,12 +27,12 @@ class WebService {
         var players: List<Player>
         do {
             var json = WebConnector.getRanks(gameId, collectedCount)
-            rankings = rankingMapper.getRanks(json).map { it.toRanking() }
+            rankings = rankingMapper.getRanks(json).map { it.toRanking(gameId) }
             rankingService.saveAll(rankings)
             players = rankingMapper.getRanks(json).map { it.toPlayer() }
             playerService.saveAll(players)
             collectedCount += rankings.size
             //TODO remoe 11 hardcoded value (for debug purpose)
-        } while (collectedCount < 11 && rankings.size == 10)
+        } while (collectedCount < 51 && rankings.size == 10)
     }
 }

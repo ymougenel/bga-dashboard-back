@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface RankingsRepository : JpaRepository<Ranking, Long> {
+    fun findByPlayerId(playerId: Long): List<Ranking>
 }

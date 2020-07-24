@@ -19,4 +19,9 @@ class RankingsService {
     }
 
     fun saveAll(rankings: List<Ranking>): List<Ranking> = rankingsRepository.saveAll(rankings)
+    fun findRanksForGame(gameId: String, playerId: Long): List<Ranking> {
+        //TODO jpa query (from, to, game, playerid)
+        var ranks = rankingsRepository.findByPlayerId(playerId)//.filter { it.gameId == gameId}
+        return ranks
+    }
 }

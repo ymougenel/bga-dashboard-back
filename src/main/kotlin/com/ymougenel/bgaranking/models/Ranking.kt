@@ -13,6 +13,7 @@ class Ranking {
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long = 0
     var playerId: Long = 0
+    var gameId: String = ""
     var elo: Long = 0
     var rank: Long = 0
     var date = LocalDateTime.now()

@@ -19,10 +19,12 @@ public class JsonRankings {
     public long rank;
 
 
-    public JsonRankings(){}
+    public JsonRankings() {
+    }
 
-    public Ranking toRanking() {
+    public Ranking toRanking(String gameId) {
         Ranking ranking = new Ranking();
+        ranking.setGameId(gameId);
         ranking.setPlayerId(playerId);
         ranking.setRank(rank);
         ranking.setElo(Long.valueOf(arena.split("\\.")[1])); // arena is formed as this: 501.1851

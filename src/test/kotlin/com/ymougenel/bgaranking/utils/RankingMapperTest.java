@@ -25,12 +25,13 @@ public class RankingMapperTest {
 
         List<Ranking> rankings = rankingMapper.getRanks(json)
                 .stream()
-                .map(JsonRankings::toRanking)
+                .map(s -> s.toRanking("123"))
                 .collect(Collectors.toList());
 
         assertEquals(10, rankings.size());
         assertEquals(63527099, rankings.get(1).getPlayerId());
         assertEquals(1912,rankings.get(0).getElo());
+        assertEquals("123", rankings.get(0).getGameId());
         assertEquals(1, rankings.get(0).getRank());
 
     }
