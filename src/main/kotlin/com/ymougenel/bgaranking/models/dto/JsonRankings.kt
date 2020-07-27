@@ -11,11 +11,11 @@ class JsonRankings {
     @JsonProperty("id")
     var playerId: Long = 0
     @JsonProperty("name")
-    var playerName: String? = null
+    var playerName: String = ""
     @JsonProperty("countryName")
     var countryName: String? = null
-    var arena: String? = null
-    var avatar: String? = null
+    var arena: String = ""
+    var avatar: String = ""
     @JsonProperty("rank_no")
     var rank: Long = 0
 

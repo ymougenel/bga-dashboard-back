@@ -25,7 +25,7 @@ public class WebConnectorTest {
 
         jsonRanks = WebConnector.getRanks(Games.DICE_FORGE.id,50);
         assertEquals(10, rankingMapper.getRanks(jsonRanks).size());
-        assertEquals(51, rankingMapper.getRanks(jsonRanks).get(0).rank);
+        assertEquals(51, rankingMapper.getRanks(jsonRanks).get(0).getRank());
 
     }
 }

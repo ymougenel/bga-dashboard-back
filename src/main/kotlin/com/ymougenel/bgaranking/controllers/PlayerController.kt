@@ -6,6 +6,9 @@ import com.ymougenel.bgaranking.utils.RankingsService
 import com.ymougenel.bgaranking.utils.WebService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.web.bind.annotation.*
 
 //TODO: define origin policy
@@ -31,6 +34,13 @@ class PlayerController {
         return playerService.findByPlayerName(playerName)
     }
 
+    @GetMapping("/search/{queryName}")
+    fun searchMatchingPlayerName(@PathVariable("queryName") queryName: String): Page<Player> {
+        val pageRequest : PageRequest = PageRequest.of(0, 10, Sort.Direction.fromString("ASC"), "name")
+        return playerService.findPlayerByNameContaining(queryName, pageRequest)
+    }
+
+    // TODO move to batch
     @GetMapping("/save/{id}")
     fun saveGameRankings(@PathVariable("id") gameId: String) {
         this.webService.save(gameId)

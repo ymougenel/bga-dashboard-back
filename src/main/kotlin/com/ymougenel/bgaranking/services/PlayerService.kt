@@ -4,6 +4,7 @@ import com.ymougenel.bgaranking.models.Player
 import com.ymougenel.bgaranking.persistence.PlayersRepository
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 
 @Service
@@ -21,4 +22,6 @@ class PlayerService {
     fun saveAll(players: List<Player>) = playersRepository.saveAll(players)
 
     fun findByPlayerName(playerName: String) = playersRepository.findByName(playerName)
+
+    fun findPlayerByNameContaining(queryName: String, pageRequest: PageRequest) = playersRepository.findPlayerByNameContainingIgnoreCase(queryName, pageRequest)
 }
