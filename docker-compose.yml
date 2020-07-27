@@ -11,3 +11,31 @@ services:
       - POSTGRES_USER=dbuser
     ports:
       - "5432:5432"
+    networks:
+    - bga-rankings
+
+  bga-ranking-back:
+#    image: slonepi/bga-ranking-back:0.1.0-SNAPSHOT
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: slonepi/bga-ranking-back:0.0.1
+    container_name: bga-back
+    depends_on:
+    - bga-ranking-database
+    ports:
+    - 8080:8080
+    environment:
+    - DATABASE_HOST=bga-ranking-database
+    - DATABASE_USER=dbuser
+    - DATABASE_PASSWORD=dbp4ss
+    - DATABASE_NAME=bga_ranking
+    - DATABASE_PORT=5432
+    command: ["./docker-wait-for-it.sh"]
+    networks:
+    - bga-rankings
+
+networks:
+  bga-rankings:
+    name: bga-rankings
+    driver: bridge

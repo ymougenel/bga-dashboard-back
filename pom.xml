@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.ymougenel</groupId>
 	<artifactId>bga-ranking</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>bga-ranking</name>
 	<description>Board Game Arena Ranking</description>
 
