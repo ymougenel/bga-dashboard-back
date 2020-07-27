@@ -1,0 +1,13 @@
+# This file is an example: the host and variables should be changed
+all:
+  hosts:
+    server:
+      ansible_host: MY_SERVER
+
+  vars:
+    ansible_user: centos
+    BGA_DB_NAME: "bga_ranking"
+    BGA_DB_PORT: "5432"
+    BGA_DB_USER: "dbuser"
+    BGA_DB_PWD: "changeMe"
+    BGA_APP_VERSION: "0.0.1"
