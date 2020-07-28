@@ -8,7 +8,7 @@
     state: started
     recreate: "{{ DB_RECREATE }}"
     ports:
-      - "{{ BGA_DB_PORT }}:{{ BGA_DB_PORT }}"
+      - "{{ BGA_DB_PORT }}:5432"
     env:
       POSTGRES_USER: "{{ BGA_DB_USER }}"
       POSTGRES_PASSWORD: "{{ BGA_DB_PWD }}"
@@ -24,10 +24,10 @@
     ports:
       - "8093:8080"
     env:
-      DATABASE_HOST: "bga_ranking"
+      DATABASE_HOST: "bga-ranking-database"
       DATABASE_USER: "{{ BGA_DB_USER }}"
       DATABASE_PASSWORD: "{{ BGA_DB_PWD }}"
       DATABASE_NAME: "{{ BGA_DB_NAME }}"
-      DATABASE_PORT: "{{ BGA_DB_PORT }}"
+      DATABASE_PORT: "5432"
     links:
       - bga-ranking-database
