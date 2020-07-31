@@ -15,7 +15,7 @@ COPY pom.xml /usr/src/app
 RUN mvn dependency:go-offline
 
 COPY src /usr/src/app/src
-RUN mvn clean package
+RUN mvn clean package -DskipTests=true
 
 FROM openjdk:11
 ADD docker-wait-for-it.sh docker-wait-for-it.sh

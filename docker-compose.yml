@@ -19,7 +19,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    image: slonepi/bga-ranking-back:0.0.1
+    image: slonepi/bga-ranking-back:0.0.2
     container_name: bga-back
     depends_on:
     - bga-ranking-database

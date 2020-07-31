@@ -31,9 +31,13 @@ class GameController {
 
     @GetMapping("/all")
     fun getAll(): MutableList<Game> {
-        return Arrays.asList(Game("Dice Forge", 1127,"https://x.boardgamearena.net/data/themereleases/current/games/diceforge/200704-2331/img/game_box180.png"),
-                Game("7 Wonders", 1131,"https://x.boardgamearena.net/data/themereleases/current/games/sevenwonders/200213-1215/img/game_box180.png"));
-//        return gameService.findAll()
+        var allGames = gameService.findAll()
+        if (allGames.isEmpty()) {
+            // TODO: fix data injection
+            allGames = this.gameService.saveAll(Arrays.asList(Game("Dice Forge", 1127,"https://x.boardgamearena.net/data/themereleases/current/games/diceforge/200704-2331/img/game_box180.png"),
+                    Game("7 Wonders", 1131,"https://x.boardgamearena.net/data/themereleases/current/games/sevenwonders/200213-1215/img/game_box180.png")))
+        }
+        return allGames
     }
 
 
