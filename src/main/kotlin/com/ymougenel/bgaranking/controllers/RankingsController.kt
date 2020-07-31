@@ -5,6 +5,10 @@ import com.ymougenel.bgaranking.utils.RankingsService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
+import java.time.OffsetDateTime
+import java.time.ZoneId
+import java.time.Instant
+
 
 //TODO: define origin policy
 @CrossOrigin
@@ -26,9 +30,14 @@ class RankingsController {
         return rankingsService.findRanksForGame(gameId, playerId)
     }
 
-//    @GetMapping("/{playerId}")
-//    fun getRank(@PathVariable("playerId") playerId: Long): List<Ranking> {
-//        return rankingsService.findRanksForGame("1127", playerId)
-//    }
+    @GetMapping("/{gameId}/{startDate}/{endDate}")
+    fun getRank(@PathVariable("gameId") gameId: String,
+                @PathVariable("startDate") startDate: Long,
+                @PathVariable("endDate") endDate: Long): List<Ranking> {
+        val odt = OffsetDateTime.now(ZoneId.systemDefault())
+        val zoneOffset = odt.offset
+        return rankingsService.findRanksForGameBetween(gameId, Instant.ofEpochSecond(endDate).atOffset(zoneOffset),  Instant.ofEpochSecond(startDate).atOffset(zoneOffset))
+    }
+
 
 }

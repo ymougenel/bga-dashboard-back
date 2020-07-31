@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 import java.time.LocalDateTime
+import java.time.OffsetDateTime
 
 
 @Entity
@@ -16,5 +17,5 @@ class Ranking {
     var gameId: String = ""
     var elo: Long = 0
     var rank: Long = 0
-    var date = LocalDateTime.now()
+    var date = OffsetDateTime.now()
 }
