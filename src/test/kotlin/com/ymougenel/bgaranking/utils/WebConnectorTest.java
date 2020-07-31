@@ -1,35 +1,29 @@
-package com.ymougenel.bgaranking.utils
+package com.ymougenel.bgaranking.utils;
 
-import com.ymougenel.bgaranking.models.Game
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.junit4.SpringRunner
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.IOException
-import java.net.URISyntaxException
-import java.util.Arrays
+import java.io.IOException;
+import java.net.URISyntaxException;
 
-import org.junit.Assert.*
+import static org.junit.Assert.*;
 
 
-@RunWith(SpringRunner::class)
+@RunWith(SpringRunner.class)
 @SpringBootTest
-class WebConnectorTest {
+public class WebConnectorTest {
 
-    private val rankingMapper = RankingMapper()
+    private RankingMapper rankingMapper = new RankingMapper();
     @Test
-    @Throws(IOException::class, URISyntaxException::class)
-    fun testRankingsPage() {
-        val DICE_FORGE = Game()
-        DICE_FORGE.id = 1127L
-        DICE_FORGE.name = "Dice Forge"
-        var jsonRanks = WebConnector.getRanks(DICE_FORGE.id.toString() + "", 0)
-        assertEquals(10, rankingMapper.getRanks(jsonRanks).size.toLong())
+    public void testRankingsPage() throws IOException, URISyntaxException {
+        String jsonRanks = WebConnector.getRanks("1127l",0);
+        assertEquals(10, rankingMapper.getRanks(jsonRanks).size());
 
-        jsonRanks = WebConnector.getRanks(DICE_FORGE.id.toString() + "", 50)
-        assertEquals(10, rankingMapper.getRanks(jsonRanks).size.toLong())
-        assertEquals(51, rankingMapper.getRanks(jsonRanks)[0].rank)
+        jsonRanks = WebConnector.getRanks("1127l",50);
+        assertEquals(10, rankingMapper.getRanks(jsonRanks).size());
+        assertEquals(51, rankingMapper.getRanks(jsonRanks).get(0).getRank());
 
     }
 }
