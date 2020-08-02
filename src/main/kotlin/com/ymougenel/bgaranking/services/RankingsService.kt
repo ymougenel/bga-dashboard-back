@@ -1,6 +1,8 @@
 package com.ymougenel.bgaranking.utils
 
 import com.ymougenel.bgaranking.models.Ranking
+import com.ymougenel.bgaranking.models.dto.RankingTableDTO
+import com.ymougenel.bgaranking.persistence.PlayersRepository
 import com.ymougenel.bgaranking.persistence.RankingsRepository
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,10 +15,12 @@ class RankingsService {
 
     var logger = LoggerFactory.getLogger(RankingsService::class.java)
     private val rankingsRepository: RankingsRepository
+    private val playersRepository: PlayersRepository
 
     @Autowired
-    constructor(rankingsRepository: RankingsRepository) {
+    constructor(rankingsRepository: RankingsRepository, playersRepository: PlayersRepository) {
         this.rankingsRepository = rankingsRepository
+        this.playersRepository = playersRepository
     }
 
     fun saveAll(rankings: List<Ranking>): List<Ranking> = rankingsRepository.saveAll(rankings)
@@ -30,5 +34,6 @@ class RankingsService {
             this.rankingsRepository
                     .findAllByDateLessThanEqualAndDateGreaterThanEqual(endDate, startDate)
                     .filter { it.gameId == gameId }
+                    .map{ ranking -> RankingTableDTO.fromRanking(ranking, this.playersRepository.findById(ranking.playerId).get() )}
                     // TODO: filter in sql request
 }

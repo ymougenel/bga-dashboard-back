@@ -1,6 +1,7 @@
 package com.ymougenel.bgaranking.controllers
 
 import com.ymougenel.bgaranking.models.Ranking
+import com.ymougenel.bgaranking.models.dto.RankingTableDTO
 import com.ymougenel.bgaranking.utils.RankingsService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -33,7 +34,7 @@ class RankingsController {
     @GetMapping("/{gameId}/{startDate}/{endDate}")
     fun getRank(@PathVariable("gameId") gameId: String,
                 @PathVariable("startDate") startDate: Long,
-                @PathVariable("endDate") endDate: Long): List<Ranking> {
+                @PathVariable("endDate") endDate: Long): List<RankingTableDTO> {
 
         val odt = OffsetDateTime.now(ZoneId.systemDefault())
         val zoneOffset = odt.offset
