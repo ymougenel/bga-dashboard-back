@@ -29,6 +29,6 @@ class RankingsService {
     fun findRanksForGameBetween(gameId: String, endDate: OffsetDateTime, startDate: OffsetDateTime) =
             this.rankingsRepository
                     .findAllByDateLessThanEqualAndDateGreaterThanEqual(endDate, startDate)
+                    .filter { it.gameId == gameId }
                     // TODO: filter in sql request
-//                    .filter { ranking: Ranking -> ranking.gameId == gameId }
 }
