@@ -36,11 +36,12 @@ class GameController {
             // TODO: fix data injection
             allGames = this.gameService.saveAll(Arrays.asList(
                     Game("Dice Forge", 1127,"https://x.boardgamearena.net/data/themereleases/current/games/diceforge/200704-2331/img/game_box180.png"),
-                    Game("7 Wonders", 1131,"https://x.boardgamearena.net/data/themereleases/current/games/sevenwonders/200213-1215/img/game_box180.png"),
-                    Game("6 Nimmt!", 1008,"https://x.boardgamearena.net/data/themereleases/200730-1036/games/sechsnimmt/200213-1217/img/game_box180.png"),
-                    Game("Carcassonne", 1,"https://x.boardgamearena.net/data/themereleases/200730-1036/games/carcassonne/200718-1127/img/game_box180.png"),
-                    Game("Kingdomino", 1148,"https://x.boardgamearena.net/data/themereleases/200730-1036/games/kingdomino/200213-1216/img/game_box180.png"),
-                    Game("Seasons", 30,"https://x.boardgamearena.net/data/themereleases/200730-1036/games/seasons/200310-0942/img/game_box180.png")))
+                    Game("7 Wonders", 1131,"https://x.boardgamearena.net/data/themereleases/current/games/sevenwonders/200213-1215/img/game_box180.png")
+//                    Game("6 Nimmt!", 1008,"https://x.boardgamearena.net/data/themereleases/200730-1036/games/sechsnimmt/200213-1217/img/game_box180.png"),
+//                    Game("Carcassonne", 1,"https://x.boardgamearena.net/data/themereleases/200730-1036/games/carcassonne/200718-1127/img/game_box180.png"),
+//                    Game("Kingdomino", 1148,"https://x.boardgamearena.net/data/themereleases/200730-1036/games/kingdomino/200213-1216/img/game_box180.png"),
+//                    Game("Seasons", 30,"https://x.boardgamearena.net/data/themereleases/200730-1036/games/seasons/200310-0942/img/game_box180.png")
+            ))
         }
         return allGames
     }

@@ -34,6 +34,7 @@ class RankingsController {
     fun getRank(@PathVariable("gameId") gameId: String,
                 @PathVariable("startDate") startDate: Long,
                 @PathVariable("endDate") endDate: Long): List<Ranking> {
+
         val odt = OffsetDateTime.now(ZoneId.systemDefault())
         val zoneOffset = odt.offset
         return rankingsService.findRanksForGameBetween(gameId, Instant.ofEpochSecond(endDate).atOffset(zoneOffset),  Instant.ofEpochSecond(startDate).atOffset(zoneOffset))

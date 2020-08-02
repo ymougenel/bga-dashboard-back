@@ -31,12 +31,14 @@ class PlayerController {
 
     @GetMapping("/{playerName}")
     fun getRank(@PathVariable("playerName") playerName: String): Player {
+        logger.info("bga-REQUEST /player/$playerName")
         return playerService.findByPlayerName(playerName)
     }
 
     @GetMapping("/search/{queryName}")
     fun searchMatchingPlayerName(@PathVariable("queryName") queryName: String): Page<Player> {
-        val pageRequest : PageRequest = PageRequest.of(0, 10, Sort.Direction.fromString("ASC"), "name")
+        logger.info("bga-REQUEST /player/search/$queryName")
+        val pageRequest: PageRequest = PageRequest.of(0, 10, Sort.Direction.fromString("ASC"), "name")
         return playerService.findPlayerByNameContaining(queryName, pageRequest)
     }
 
