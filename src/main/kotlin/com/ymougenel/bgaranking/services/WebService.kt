@@ -33,6 +33,6 @@ class WebService {
             playerService.saveAll(players)
             collectedCount += rankings.size
             //TODO remoe 11 hardcoded value (for debug purpose)
-        } while (collectedCount < 51 && rankings.size == 10)
+        } while (collectedCount < 300 && rankings.size == 10)
     }
 }
