@@ -15,7 +15,7 @@ import java.net.URL;
 
 public class WebConnector {
 
-    private static String GBA_URL = "https://boardgamearena.com/gamepanel/gamepanel/getRanking.html" + "?game=1127&start=0&mode=arena";
+    private static String GBA_URL = "https://boardgamearena.com/gamepanel/gamepanel/getRanking.html";
     private static DefaultHttpClient httpClient = new DefaultHttpClient();
 
     public static String getRanks(String gameId, long from) throws IOException, URISyntaxException {
@@ -29,7 +29,8 @@ public class WebConnector {
     private static String buildUrl(String gameid, long start) throws URISyntaxException {
         URIBuilder builder = new URIBuilder(GBA_URL);
         builder.setParameter("game", gameid)
-                .setParameter("start", String.valueOf(start));
+                .setParameter("start", String.valueOf(start))
+                .setParameter("mode", "arena");
         return builder.toString();
     }
 }

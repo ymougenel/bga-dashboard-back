@@ -25,7 +25,7 @@ class RankingsService {
 
     fun saveAll(rankings: List<Ranking>): List<Ranking> = rankingsRepository.saveAll(rankings)
     fun findRanksForGame(gameId: String, playerId: Long): List<Ranking> {
-        //TODO jpa query (from, to, game, playerid)
+        //TODO jpa query (from, to, gameId, playerid)
         return rankingsRepository.findByPlayerId(playerId)
                 .filter { it.gameId == gameId }
     }
@@ -35,33 +35,33 @@ class RankingsService {
                 .findAllByDateLessThanEqualAndDateGreaterThanEqual(endDate, startDate)
                 .filter { it.gameId == gameId }
 
-        val slicedRankings = sliceRankingsOccurances(allGameRankings)
-                .map { ranking -> RankingTableDTO.fromRanking(ranking, this.playersRepository.findById(ranking.playerId).get()) }
-        return slicePlayerRankings(slicedRankings, playerId, count)
+        val slicedRankings = slicePlayerRankings(allGameRankings, playerId, count)
+//                .map { ranking -> RankingTableDTO.fromRanking(ranking, this.playersRepository.findById(ranking.playerId).get()) }
+        return slicedRankings
         // TODO: filter in sql request
     }
 
-
-    private fun sliceRankingsOccurances(allrankings: List<Ranking>): List<Ranking> {
-        if (allrankings.isEmpty()) {
-            return allrankings
-        }
-        val total = allrankings.size
-        // Between tow dates, many ranking snapshot could have been taken, take  most recent TODO oldest
-        val occurrencesNb = allrankings
-                .filter { ranking -> ranking.playerId == allrankings.get(0).playerId }
-                .count()
-        return allrankings.subList(0, total / occurrencesNb)
-    }
-
-    private fun slicePlayerRankings(rankings: List<RankingTableDTO>, playerId: Long, count: Long): List<RankingTableDTO> {
+    private fun slicePlayerRankings(rankings: List<Ranking>, playerId: Long, count: Long): List<RankingTableDTO> {
         if (rankings.isEmpty()) {
-            return rankings;
+            return ArrayList()
         }
-        val playerRankings = rankings.filter { r -> r.player!!.id == playerId }
+        val playerRankings = rankings.filter { r -> r.playerId == playerId }
         if (playerRankings.isEmpty()) {
             return ArrayList()
         }
-        return rankings.filter{ ranking -> Math.abs(ranking.rank!! - playerRankings.get(0).rank!!) <= count / 2}
+
+        val latesetExecutionId = playerRankings.get(playerRankings.size - 1).executionTraceId
+        val playerRank = playerRankings.last().rank
+        // Filter:
+        // 1/ Take latest date (executionTraceId)
+        // 2/ Select ranking around rank
+        val filterRankings = rankings
+                .filter { ranking -> ranking.executionTraceId == latesetExecutionId }
+                .filter { ranking -> Math.abs(ranking.rank - playerRank) <= count / 2 }
+        return filterRankings.map { ranking ->
+            RankingTableDTO.fromRanking(ranking,
+                                                                            rankings.first { it.playerId == ranking.playerId },
+                    this.playersRepository.findById(ranking.playerId).get())
+        }
     }
 }

@@ -17,5 +17,6 @@ class Ranking {
     var gameId: String = ""
     var elo: Long = 0
     var rank: Long = 0
+    var executionTraceId: Long = 0
     var date = OffsetDateTime.now()
 }
