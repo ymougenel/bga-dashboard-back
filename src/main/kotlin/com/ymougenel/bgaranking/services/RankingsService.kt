@@ -58,10 +58,10 @@ class RankingsService {
         if (rankings.isEmpty()) {
             return rankings;
         }
-        val total = rankings.size;
-        val playerRank = rankings.filter { r -> r.player!!.id == playerId }
-                .first().rank;
-
-        return rankings.filter{ ranking -> Math.abs(ranking.rank!! - playerRank!!) <= count / 2}
+        val playerRankings = rankings.filter { r -> r.player!!.id == playerId }
+        if (playerRankings.isEmpty()) {
+            return ArrayList()
+        }
+        return rankings.filter{ ranking -> Math.abs(ranking.rank!! - playerRankings.get(0).rank!!) <= count / 2}
     }
 }
