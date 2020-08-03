@@ -31,14 +31,16 @@ class RankingsController {
         return rankingsService.findRanksForGame(gameId, playerId)
     }
 
-    @GetMapping("/{gameId}/{startDate}/{endDate}")
+    @GetMapping("/{gameId}/{playerId}/{count}/{startDate}/{endDate}")
     fun getRank(@PathVariable("gameId") gameId: String,
+                @PathVariable("playerId") playerId: Long,
+                @PathVariable("count") count: Long,
                 @PathVariable("startDate") startDate: Long,
                 @PathVariable("endDate") endDate: Long): List<RankingTableDTO> {
 
         val odt = OffsetDateTime.now(ZoneId.systemDefault())
         val zoneOffset = odt.offset
-        return rankingsService.findRanksForGameBetween(gameId, Instant.ofEpochSecond(endDate).atOffset(zoneOffset),  Instant.ofEpochSecond(startDate).atOffset(zoneOffset))
+        return rankingsService.findRanksForGameBetween(gameId, playerId, count, Instant.ofEpochSecond(endDate).atOffset(zoneOffset),  Instant.ofEpochSecond(startDate).atOffset(zoneOffset))
     }
 
 
