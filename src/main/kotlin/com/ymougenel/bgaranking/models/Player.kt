@@ -8,7 +8,9 @@ class Player {
     var name: String = ""
     @Id
     var id: Long = 0
-    var country: String = ""
     var avatar: String = ""
+    var country: String = ""
+    var countryFlagX = 0
+    var countryFlagY = 0
 
 }

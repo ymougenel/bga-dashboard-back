@@ -13,11 +13,17 @@ class JsonRankings {
     @JsonProperty("name")
     var playerName: String = ""
     @JsonProperty("countryName")
-    var countryName: String? = null
+    var countryName: String = ""
     var arena: String = ""
     var avatar: String = ""
     @JsonProperty("rank_no")
     var rank: Long = 0
+    @JsonProperty("countryCode")
+    var countryCode: String = ""
+    @JsonProperty("countryFlagX")
+    var countryFlagX: Int = 0
+    @JsonProperty("countryFlag_y")
+    var countryFlagY: Int = 0
 
     fun toRanking(gameId: String): Ranking {
         val ranking = Ranking()
@@ -33,7 +39,16 @@ class JsonRankings {
         player.id = playerId
         player.name = playerName
         player.avatar = avatar
-        //        player.setCountry(countryName);
+        player.country = countryCode
+        player.countryFlagX = countryFlagX
+        player.countryFlagY = countryFlagY
         return player
+    }
+
+    @JsonProperty("country")
+    private fun unpackNested(country: Map<String, Any>) {
+        this.countryCode = country["code"] as String
+        this.countryFlagX = country["flag_x"] as Int
+        this.countryFlagY = country["flag_y"] as Int
     }
 }
