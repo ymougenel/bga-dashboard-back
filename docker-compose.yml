@@ -15,11 +15,10 @@ services:
     - bga-rankings
 
   bga-ranking-back:
-#    image: slonepi/bga-ranking-back:0.1.0-SNAPSHOT
     build:
       context: .
       dockerfile: ./Dockerfile
-    image: slonepi/bga-ranking-back:0.0.2
+    image: slonepi/bga-ranking-back:1.0.0
     container_name: bga-back
     depends_on:
     - bga-ranking-database
