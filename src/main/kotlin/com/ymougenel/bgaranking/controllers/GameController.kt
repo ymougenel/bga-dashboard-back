@@ -41,6 +41,7 @@ class GameController {
                     Game("6 Nimmt!", 1008,"https://x.boardgamearena.net/data/themereleases/200730-1036/games/sechsnimmt/200213-1217/img/game_box180.png"),
                     Game("Kingdomino", 1148,"https://x.boardgamearena.net/data/themereleases/200730-1036/games/kingdomino/200213-1216/img/game_box180.png"),
                     Game("Lost Cities", 9,"https://x.boardgamearena.net/data/themereleases/200730-1036/games/lostcities/200213-1218/img/game_box180.png"),
+                    Game("Takenoko", 37,"https://x.boardgamearena.net/data/themereleases/200730-1036/games/takenoko/200213-1218/img/game_box180.png"),
                     Game("Seasons", 30,"https://x.boardgamearena.net/data/themereleases/200730-1036/games/seasons/200310-0942/img/game_box180.png")
             ))
         }
